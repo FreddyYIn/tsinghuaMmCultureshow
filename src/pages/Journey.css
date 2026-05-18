@@ -1,0 +1,446 @@
+.journey-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 12px;
+  font-family: 'Arial', sans-serif;
+}
+
+.journey-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.journey-title {
+  color: white;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.flight-info-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.flight-route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.city-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.city-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+}
+
+.city-info p {
+  margin: 5px 0 0 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.city-icon {
+  color: #4f46e5;
+}
+
+.destination-icon {
+  color: #f59e0b;
+}
+
+.flight-path {
+  flex: 2;
+  margin: 0 16px;
+  position: relative;
+}
+
+.flight-line {
+  height: 4px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.flight-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #06b6d4);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.airplane {
+  position: absolute;
+  top: -10px;
+  transform: translateX(-50%);
+  color: #4f46e5;
+  transition: left 0.3s ease;
+  z-index: 10;
+}
+
+.airplane.flying {
+  animation: fly 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes fly {
+  0% { transform: translateX(-50%) translateY(-2px); }
+  100% { transform: translateX(-50%) translateY(2px); }
+}
+
+.flight-details {
+  display: flex;
+  justify-content: space-around;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+  flex-wrap: wrap;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.progress-text, .step-text {
+  font-weight: bold;
+  color: #4f46e5;
+}
+
+/* 实时位置显示面板 */
+.real-time-position {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  z-index: 1000;
+  min-width: 160px;
+}
+
+.real-time-position h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.real-time-position p {
+  margin: 5px 0;
+}
+
+.map-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  height: 340px;
+  position: relative;
+  overflow: hidden;
+}
+
+.leaflet-map {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.destination-info {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.destination-card {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.destination-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.destination-content h2 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 24px;
+}
+
+/* 新增：地图与目的地信息左右布局容器 */
+.map-info-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
+/* 去掉容器在横向布局下的底部外边距以避免多余空隙 */
+.map-info-row .map-container,
+.map-info-row .destination-info {
+  margin-bottom: 0;
+}
+
+/* 移动端回退为上下布局 */
+@media (max-width: 768px) {
+  .map-info-row {
+    grid-template-columns: 1fr;
+  }
+  .map-info-row .map-container,
+  .map-info-row .destination-info {
+    margin-bottom: 16px;
+  }
+}
+
+.destination-description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.activities-section h3 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.activities-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activities-list li {
+  background: #f8fafc;
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border-left: 4px solid #4f46e5;
+  color: #333;
+}
+
+.journey-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.start-journey-btn, .reset-journey-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #4f46e5, #06b6d4);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+}
+
+.start-journey-btn:hover, .reset-journey-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(79, 70, 229, 0.4);
+}
+
+.flying-status, .arrival-status {
+  text-align: center;
+  color: white;
+}
+
+.flying-animation, .arrival-animation {
+  font-size: 48px;
+  margin-bottom: 15px;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+/* 飞行状态动画中的飞机图标旋转 */
+.flying-animation {
+  transform: rotate(225deg);
+  display: inline-block;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.flying-status p, .arrival-status p {
+  font-size: 18px;
+  margin: 5px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.reset-journey-btn {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  margin-top: 15px;
+}
+
+/* 飞机图标方向调整 */
+.airplane-icon {
+  transform: rotate(225deg);
+  display: inline-block;
+}
+
+.airplane.flying .airplane-icon {
+  animation: flyRotated 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes flyRotated {
+  0% { transform: rotate(225deg) translateY(-2px); }
+  100% { transform: rotate(225deg) translateY(2px); }
+}
+
+/* 飞行状态动画中的飞机图标也需要旋转 */
+.flying-animation {
+  font-size: 48px;
+  margin-bottom: 15px;
+  animation: flyingBounce 1s ease-in-out infinite;
+  transform: rotate(225deg);
+  display: inline-block;
+}
+
+@keyframes flyingBounce {
+  0%, 100% { 
+    transform: rotate(225deg) translateY(0);
+  }
+  50% { 
+    transform: rotate(225deg) translateY(-10px);
+  }
+}
+
+/* 飞机标记动画 */
+@keyframes planePulse {
+  0% { 
+    transform: scale(1); 
+    box-shadow: 0 4px 12px rgba(255,0,0,0.8);
+  }
+  50% { 
+    transform: scale(1.1); 
+    box-shadow: 0 6px 20px rgba(255,0,0,1);
+  }
+  100% { 
+    transform: scale(1); 
+    box-shadow: 0 4px 12px rgba(255,0,0,0.8);
+  }
+}
+
+/* 自定义Leaflet标记样式 */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.plane-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .journey-container {
+    padding: 15px;
+  }
+  
+  .journey-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .journey-title {
+    font-size: 22px;
+  }
+  
+  .flight-route {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .flight-path {
+    margin: 0;
+    order: 2;
+  }
+  
+  .destination-card {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .destination-image {
+    height: 150px;
+  }
+  
+  .flight-details {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .map-container {
+    height: 300px;
+  }
+  
+  .real-time-position {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-bottom: 20px;
+  }
+}

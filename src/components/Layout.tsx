@@ -1,0 +1,107 @@
+import React from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Home, MapPin, Video, Star, Globe } from 'lucide-react';
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const { t, i18n } = useTranslation();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'zh' ? 'en' : 'zh';
+    i18n.changeLanguage(newLang);
+  };
+
+  const navTabs = [
+    { path: '/', name: t('nav.home') },
+    { path: '/recommendations', name: t('nav.recommendations') },
+    { path: '/journey', name: t('nav.map') },
+    { path: '/a', name: t('nav.videos') }
+  ];
+
+  const handleTabClick = (path: string) => {
+    navigate(path);
+  };
+
+  const navItems = [
+    { path: '/', icon: Home, label: t('nav.home') },
+    { path: '/recommendations', icon: Star, label: t('nav.recommendations') },
+    { path: '/map', icon: MapPin, label: t('nav.map') },
+    { path: '/videos', icon: Video, label: t('nav.videos') }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-indigo-50 to-blue-50">
+      {/* Header */}
+      <header className="bg-gradient-to-r from-purple-800 via-indigo-700 to-blue-600 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-12">
+            {/* Logo */}
+            <Link to="/" className="flex items-center space-x-2">
+              <img 
+                src="/images/logo.png" 
+                alt="Logo" 
+                className="w-12 h-12 rounded-full object-contain"
+              />
+              <span className="text-white font-bold text-xl">{t('brand.name')}</span>
+            </Link>
+
+            {/* Navigation removed (replaced by global bottom div nav) */}
+
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center space-x-1 px-3 py-2 rounded-md text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              <Globe size={18} />
+              <span className="text-sm font-medium">
+                {i18n.language === 'zh' ? 'EN' : '中文'}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation removed (replaced by global bottom div nav) */}
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1">
+        {children}
+      </main>
+
+      {/* 全局页面切换导航 */}
+      <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50">
+        <div className="flex bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl border border-white/20 p-1">
+          {navTabs.map((tab) => (
+            <button
+              key={tab.path}
+              onClick={() => handleTabClick(tab.path)}
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+                location.pathname === tab.path
+                  ? 'bg-gradient-to-r from-purple-700 to-indigo-600 text-white shadow-lg transform scale-105'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+              }`}
+            >
+              {tab.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="text-center">
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Layout;
