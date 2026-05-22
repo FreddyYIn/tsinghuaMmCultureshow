@@ -46,7 +46,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <img 
                 src="/images/logo.png" 
                 alt="Logo" 
-                className="w-12 h-12 rounded-full object-contain"
+                className="w-10 h-10 rounded-full object-cover"
               />
               <span className="text-white font-bold text-xl">{t('brand.name')}</span>
             </Link>
