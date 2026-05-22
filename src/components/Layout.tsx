@@ -43,11 +43,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="flex justify-between items-center h-12">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
-              <img 
-                src="/images/logo.png" 
-                alt="Logo" 
-                className="w-12 h-12 rounded-full object-contain"
-              />
+              <div className="w-12 h-12 rounded-full bg-white p-1 flex items-center justify-center">
+                <img 
+                  src="/images/logo.png" 
+                  alt="Logo" 
+                  className="w-full h-full rounded-full object-contain"
+                />
+              </div>
               <span className="text-white font-bold text-xl">{t('brand.name')}</span>
             </Link>
 
