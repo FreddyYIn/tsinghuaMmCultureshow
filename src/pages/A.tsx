@@ -11,13 +11,6 @@ const A: React.FC = () => {
   const sectionDesc = 'text-gray-500 text-xs';
   const carouselBase = 'flex gap-4 overflow-x-auto px-2 py-2';
 
-  const postcards = [
-    { title: t('aPage.postcardTitles.beijing'), subtitle: t('aPage.postcardSubtitles.beijing'), emoji: '📮' },
-    { title: t('aPage.postcardTitles.yangon'), subtitle: t('aPage.postcardSubtitles.yangon'), emoji: '✉️' },
-    { title: t('aPage.postcardTitles.bagan'), subtitle: t('aPage.postcardSubtitles.bagan'), emoji: '🌅' },
-    { title: t('aPage.postcardTitles.inleLake'), subtitle: t('aPage.postcardSubtitles.inleLake'), emoji: '🌊' },
-  ];
-
   const videos = [
     { title: t('aPage.videoTitles.culture'), duration: '4:32', image: 'https://placehold.co/600x400?text=Myanmar+Culture' },
     { title: t('aPage.videoTitles.bagan'), duration: '6:05', image: 'https://placehold.co/600x400?text=Bagan+Drone' },
@@ -25,14 +18,12 @@ const A: React.FC = () => {
     { title: t('aPage.videoTitles.inleLake'), duration: '3:48', image: 'https://placehold.co/600x400?text=Inle+Lake+Life' },
   ];
 
-  // 缅甸 5 城市明信片（正面/背面）存放路径
+  // 缅甸 5 城市数据
   const postcardSets = [
     { 
       city: '仰光', 
       cityEn: 'Yangon', 
       slug: 'yangon', 
-      front: '/images/postcards/yangon-front.png', 
-      back: '/images/postcards/yangon-back.png',
       coordinates: { lat: 16.8661, lng: 96.1951 }, // 真实地理坐标
       description: t('aPage.cityDescriptions.yangon')
     },
@@ -40,8 +31,6 @@ const A: React.FC = () => {
       city: '蒲甘', 
       cityEn: 'Bagan', 
       slug: 'bagan', 
-      front: '/images/postcards/bagan-front.png', 
-      back: '/images/postcards/bagan-back.png',
       coordinates: { lat: 21.1717, lng: 94.8574 },
       description: t('aPage.cityDescriptions.bagan')
     },
@@ -49,8 +38,6 @@ const A: React.FC = () => {
       city: '曼德勒', 
       cityEn: 'Mandalay', 
       slug: 'mandalay', 
-      front: '/images/postcards/mandalay-front.png', 
-      back: '/images/postcards/mandalay-back.png',
       coordinates: { lat: 21.9588, lng: 96.0891 },
       description: t('aPage.cityDescriptions.mandalay')
     },
@@ -58,8 +45,6 @@ const A: React.FC = () => {
       city: '茵莱湖', 
       cityEn: 'Inle Lake', 
       slug: 'inle-lake', 
-      front: '/images/postcards/inle-lake-front.png', 
-      back: '/images/postcards/inle-lake-back.png',
       coordinates: { lat: 20.5792, lng: 96.9014 },
       description: t('aPage.cityDescriptions.inleLake')
     },
@@ -67,8 +52,6 @@ const A: React.FC = () => {
       city: '额吉利海滩', 
       cityEn: 'Ngapali Beach', 
       slug: 'ngapali', 
-      front: '/images/postcards/ngapali-front.png', 
-      back: '/images/postcards/ngapali-back.png',
       coordinates: { lat: 18.8050, lng: 94.3372 },
       description: t('aPage.cityDescriptions.ngapali')
     },
@@ -103,22 +86,6 @@ const A: React.FC = () => {
     }
   };
 
-  // 读取推荐城市：优先 URL 参数 ?city=，其次 localStorage.recommendedCitySlug
-  const getSelectedCitySlug = (): string => {
-    try {
-      const search = typeof window !== 'undefined' ? window.location.search : '';
-      const qp = new URLSearchParams(search);
-      const urlCity = qp.get('city');
-      if (urlCity) return urlCity;
-      const storedCity = typeof window !== 'undefined' ? localStorage.getItem('recommendedCitySlug') : null;
-      return storedCity || 'yangon';
-    } catch {
-      return 'yangon';
-    }
-  };
-
-  const selectedCitySlug = getSelectedCitySlug();
-  const activePostcard = postcardSets.find(p => p.slug === selectedCitySlug) || postcardSets[0];
   const activeVideoCity = postcardSets.find(p => p.slug === selectedCityForVideo) || postcardSets[0];
 
   // 处理城市点击
