@@ -315,53 +315,6 @@ const A: React.FC = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 py-6 space-y-8">
-          {/* 城市明信片正反面展示（仅推荐城市） */}
-          <section>
-            <div className="flex items-end justify-between mb-4">
-              <div>
-                <h2 className={sectionTitle}>
-                  {t('aPage.postcardTitle')} <span className="text-purple-700 font-bold">({t('aPage.postcardReminder')})</span>
-                </h2>
-                <p className={sectionDesc}>{t('aPage.postcardDescription')}</p>
-              </div>
-            </div>
-            {/* 正反面图片 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* 正面 */}
-              <div className="rounded-2xl shadow-lg border border-white/20 overflow-hidden bg-white/90">
-                <div className="px-3 py-2 border-b text-gray-700 text-xs">{t('aPage.frontSide')}</div>
-                <div className="w-full h-64 flex items-center justify-center bg-white">
-                  <img
-                    src={activePostcard.front}
-                    alt={`${activePostcard.city} 明信片正面`}
-                    className="max-w-full max-h-full object-contain"
-                    loading="lazy"
-                    onError={(e) => {
-                      const img = e.currentTarget as HTMLImageElement;
-                      img.src = 'https://placehold.co/800x480?text=Postcard+Front';
-                    }}
-                  />
-                </div>
-              </div>
-              {/* 背面 */}
-              <div className="rounded-2xl shadow-lg border border-white/20 overflow-hidden bg-white/90">
-                <div className="px-3 py-2 border-b text-gray-700 text-xs">{t('aPage.backSide')}</div>
-                <div className="w-full h-64 flex items-center justify-center bg-white">
-                  <img
-                    src={activePostcard.back}
-                    alt={`${activePostcard.city} 明信片背面`}
-                    className="max-w-full max-h-full object-contain"
-                    loading="lazy"
-                    onError={(e) => {
-                      const img = e.currentTarget as HTMLImageElement;
-                      img.src = 'https://placehold.co/800x480?text=Postcard+Back';
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-
           {/* 交互式缅甸地图与视频展示区 */}
           <section>
             <div className="flex items-end justify-between mb-4">
