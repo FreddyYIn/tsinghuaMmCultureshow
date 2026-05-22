@@ -52,12 +52,7 @@ const Home: React.FC = () => {
               {t('home.featuresDescription')}
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-            <div className="p-3 rounded-lg bg-white shadow-sm border border-gray-100">
-              <div className="text-lg mb-1">📮</div>
-              <h3 className="font-semibold text-gray-900 mb-1 text-xs">{t('home.features.postcards.title')}</h3>
-              <p className="text-xs text-gray-600">{t('home.features.postcards.description')}</p>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
             <div className="p-3 rounded-lg bg-white shadow-sm border border-gray-100">
               <div className="text-lg mb-1">🗺️</div>
               <h3 className="font-semibold text-gray-900 mb-1 text-xs">{t('home.features.map.title')}</h3>
